@@ -96,9 +96,10 @@ class waferMapFromPickle(waferMap):
         file = open(pickle_file, "rb")
         data = pickle.load(file)
         #print(data.head(10))
-        data = data.tail(10)
+        #data = data.tail(10)
         data = data[data.failureType != "none"]
-        if args.job_type == "training":
+        print(data.head(10))
+        if args.job_type == "train":
             X = data[data.trainTestLabel == "Training"].waferMap.tolist()
             y = data[data.trainTestLabel == "Training"].failureType.tolist()
         super(waferMapFromPickle, self).__init__(X=X, Y=y, transform=transform)

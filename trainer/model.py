@@ -36,7 +36,6 @@ class SequentialDNN(nn.Module):
     def forward(self, x):
         return self.sequential_model(x)
 
-
 def create(args, device):
     """
     Create the model, loss function, and optimizer to be used for the DNN
@@ -123,3 +122,6 @@ class SimSiam(nn.Module):
         p2 = self.predictor(z2)  # NxC
 
         return p1, p2, z1.detach(), z2.detach()
+    
+
+

@@ -41,7 +41,7 @@ def simsiam_train(model, train_loader, criterion, optimizer, epoch, device):
         # features = data['features']
         # target = data['target']
         img = [_img.to(device) for _img in img]
-        p1, p2, z1, z2 = model(x1=img[0], x=img[1])
+        p1, p2, z1, z2 = model(x1=img[0], x2=img[1])
         loss = -(criterion(p1, z2).mean() + criterion(p2, z1).mean()) * 0.5
         # zero the parameter gradients
         optimizer.zero_grad()

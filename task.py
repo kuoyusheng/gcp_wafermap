@@ -60,6 +60,11 @@ def get_args():
         default=42,
     )
     args_parser.add_argument(
+        '--job-type',
+        help='Job type is either train or infer',
+        default='train'
+    )
+    args_parser.add_argument(
         '--model-type',
         help='model type(default:simSiam)',
         default='simsiam'
@@ -99,7 +104,7 @@ def get_args():
     args_parser.add_argument(
         '--learning-rate',
         help='Learning rate value for the optimizers.',
-        default=0.1,
+        default=0.01,
         type=float)
     args_parser.add_argument(
         '--weight-decay',
@@ -127,13 +132,14 @@ def get_args():
     # Saved model arguments
     args_parser.add_argument(
         '--job-dir',
-        help='GCS location to export models')
+        help='GCS location to export models'
+        required=True)
     args_parser.add_argument(
         '--model-name',
         help='The name of your saved model',
         default='model.pth')
 
-    return args_parser.parse_args()
+    return args_parser.parse_args(args)
 
 
 def main():

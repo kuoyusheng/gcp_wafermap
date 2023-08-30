@@ -36,7 +36,7 @@ def get_args():
         "--eval-files",
         help="GCS or local paths to evaluation data",
         nargs="+",
-        required=True,
+        # required=True,
     )
 
     # Experiment arguments
@@ -44,7 +44,7 @@ def get_args():
         "--batch-size",
         help="Batch size for each training and evaluation step.",
         type=int,
-        default=100,
+        default=32,
     )
     args_parser.add_argument(
         "--num-epochs",
@@ -53,7 +53,7 @@ def get_args():
         If both --train-size and --num-epochs are specified,
         --train-steps will be: (train-size/train-batch-size) * num-epochs.\
         """,
-        default=50,
+        default=10,
         type=int,
     )
     args_parser.add_argument(
@@ -61,6 +61,10 @@ def get_args():
         help="Random seed (default: 42)",
         type=int,
         default=42,
+    )
+    args_parser.add_argument("--job-type", help="train or inference", default="train")
+    args_parser.add_argument(
+        "--shuffle-train", help="whether its shuffle", default=True
     )
     args_parser.add_argument(
         "--model-type", help="model type(default:simSiam)", default="simsiam"
@@ -90,7 +94,7 @@ def get_args():
     args_parser.add_argument(
         "--learning-rate",
         help="Learning rate value for the optimizers.",
-        default=0.1,
+        default=0.01,
         type=float,
     )
     args_parser.add_argument(
@@ -118,7 +122,9 @@ def get_args():
     )
 
     # Saved model arguments
-    args_parser.add_argument("--job-dir", help="GCS location to export models")
+    args_parser.add_argument(
+        "--job-dir", help="GCS location to export models", required=True
+    )
     args_parser.add_argument(
         "--model-name", help="The name of your saved model", default="model.pth"
     )
