@@ -1,0 +1,8 @@
+# directory
+logs/
+
+#data file
+*.jpg
+*.pkl
+*.mar
+*.pth
