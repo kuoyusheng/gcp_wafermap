@@ -44,5 +44,5 @@ class SSLVision(VisionHandler):
     def inference(self, data, *args, **kwargs):
         marshalled_data = data.to(self.device)
         with torch.no_grad():
-            results = self.model.encoder(data, *args, **kwargs)
+            results = torch.nn.functional.normalize(self.model.encoder(data, *args, **kwargs))
         return results

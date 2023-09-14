@@ -1,0 +1,4 @@
+torchserve --start \             
+           --ncs \
+           --model-store inference\
+           --models model.mar
